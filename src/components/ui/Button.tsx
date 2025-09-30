@@ -17,7 +17,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   type = 'button',
   ...props 
 }, ref) => {
-  const baseClasses = 'font-bold py-2 px-4 rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
+
+  const baseClasses = 'font-bold py-1 px-1 rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
   
   const variantClasses = {
     primary: 'bg-blue-500 hover:bg-blue-700 text-white focus:ring-blue-500',

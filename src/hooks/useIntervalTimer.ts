@@ -144,7 +144,7 @@ export const useIntervalTimer = (initialSettings?: IntervalSettings): UseInterva
     reset(); // Reset quando mudar configurações
   };
 
-  const currentTargetTime = isActivity ? settings.activityTime : settings.restTime;
+  // const currentTargetTime = isActivity ? settings.activityTime : settings.restTime;
   const remainingActivity = Math.max(0, settings.activityTime - (isActivity ? currentTime : 0));
   const remainingRest = Math.max(0, settings.restTime - (!isActivity ? currentTime : 0));
   const remainingTotal = Math.max(0, settings.totalTime - totalElapsed);

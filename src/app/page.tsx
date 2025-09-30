@@ -6,6 +6,7 @@ import Card from '@/components/ui/Card';
 import Modal from '@/components/ui/Modal';
 import IntervalSettingsComponent from '@/components/IntervalSettings';
 import { useIntervalTimer } from '@/hooks/useIntervalTimer';
+import { TimerContainer } from '@/components/timer/TimerContainer';
 
 export default function Home() {
   const [showSettings, setShowSettings] = useState(false);
@@ -39,142 +40,27 @@ export default function Home() {
     <main className="container mx-auto px-1.5 py-2 space-y-4">
       
       <Card variant="highlighted" className='w-full flex flex-col'>
-        <div className='p-6 bg-gray-900 rounded-lg relative min-h-[400px]'>
-          
+
+        <div className='p-6 bg-gray-900 rounded-lg relative min-h-[400px] logo-background'>
+
           {/* Botão de configurações */}
-          <div className="absolute top-4 right-4">
+          <div className="absolute top-2 right-2">
             <Button
               onClick={() => setShowSettings(true)}
               variant="secondary"
-              className="text-xs px-3 py-1"
+              className="text-l px-1 py-1"
             >
-              ⚙️ Configurar
+              ⚙️
             </Button>
           </div>
 
-          {/* Fase atual (Atividade/Descanso) */}
-          <div className="text-center mb-6">
-            <div className={`text-2xl font-bold ${getPhaseColor()}`}>
-              {getPhaseLabel()}
-            </div>
-            <div className="text-gray-400 text-sm">
-              Ciclo {intervalTimer.cycleCount + 1}
-            </div>
-          </div>
+          < TimerContainer 
+            intervalTimer={intervalTimer}
+            formatTime={formatTime}  
+          />  
+          
 
-          {/* Display principal do cronômetro atual */}
-          <div className="text-center mb-6">
-            <div className={`text-6xl font-mono font-bold ${getPhaseColor()}`}>
-              <span>{intervalTimer.formattedCurrentTime.minutes}:{intervalTimer.formattedCurrentTime.seconds}</span>
-              <span className="text-3xl opacity-50">
-                .{intervalTimer.formattedCurrentTime.milliseconds}
-              </span>
-            </div>
-          </div>
-
-          {/* Barra de progresso da fase atual */}
-          <div className="mb-4">
-            <div className="flex justify-between text-sm text-gray-400 mb-1">
-              <span>Progresso da fase</span>
-              <span>{formatTime(getCurrentTarget() - intervalTimer.currentTime)} restantes</span>
-            </div>
-            <div className="w-full bg-gray-700 rounded-full h-3">
-              <div 
-                className={`h-3 rounded-full transition-all duration-100 ${
-                  intervalTimer.isActivity ? 'bg-green-500' : 'bg-blue-500'
-                }`}
-                style={{ 
-                  width: `${(intervalTimer.currentTime / getCurrentTarget()) * 100}%` 
-                }}
-              />
-            </div>
-          </div>
-
-          {/* Informações dos dois cronômetros */}
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            {/* Cronômetro de Atividade */}
-            <div className="bg-green-900/30 rounded-lg p-3 text-center">
-              <div className="text-green-400 font-semibold text-sm mb-1">⚡ ATIVIDADE</div>
-              <div className="text-white font-mono text-lg">
-                {formatTime(intervalTimer.settings.activityTime)}
-              </div>
-              {intervalTimer.isActivity && (
-                <div className="text-green-300 text-xs mt-1">
-                  Restam: {formatTime(intervalTimer.remainingActivity)}
-                </div>
-              )}
-            </div>
-
-            {/* Cronômetro de Descanso */}
-            <div className="bg-blue-900/30 rounded-lg p-3 text-center">
-              <div className="text-blue-400 font-semibold text-sm mb-1">😴 DESCANSO</div>
-              <div className="text-white font-mono text-lg">
-                {formatTime(intervalTimer.settings.restTime)}
-              </div>
-              {!intervalTimer.isActivity && (
-                <div className="text-blue-300 text-xs mt-1">
-                  Restam: {formatTime(intervalTimer.remainingRest)}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Progresso total */}
-          <div className="mb-6">
-            <div className="flex justify-between text-sm text-gray-400 mb-1">
-              <span>Progresso total</span>
-              <span>{formatTime(intervalTimer.remainingTotal)} restantes</span>
-            </div>
-            <div className="w-full bg-gray-700 rounded-full h-2">
-              <div 
-                className="bg-yellow-500 h-2 rounded-full transition-all duration-100"
-                style={{ 
-                  width: `${(intervalTimer.totalElapsed / intervalTimer.settings.totalTime) * 100}%` 
-                }}
-              />
-            </div>
-          </div>
-
-          {/* Tempo total decorrido */}
-          <div className="text-center mb-6">
-            <div className="text-gray-400 text-sm">Tempo total:</div>
-            <div className="text-yellow-400 font-mono text-xl">
-              {intervalTimer.formattedTotalTime.minutes}:{intervalTimer.formattedTotalTime.seconds}
-            </div>
-          </div>
-
-          {/* Indicador de conclusão */}
-          {intervalTimer.isCompleted && (
-            <div className="text-center mb-4">
-              <div className="bg-red-500 text-white px-4 py-2 rounded-lg inline-block animate-pulse">
-                🎉 TREINO CONCLUÍDO! 🎉
-              </div>
-            </div>
-          )}
-
-          {/* Botões de controle */}
-          <div className="flex justify-center space-x-4">
-            <Button 
-              onClick={intervalTimer.toggle} 
-              variant={intervalTimer.isRunning ? 'danger' : 'primary'} 
-              className={`px-6 py-2 ${
-                intervalTimer.isCompleted 
-                  ? 'bg-gray-600 cursor-not-allowed' 
-                  : ''
-              }`}
-              disabled={intervalTimer.isCompleted}
-            >
-              {intervalTimer.isRunning ? 'Pausar' : 'Iniciar'}
-            </Button>
-            
-            <Button 
-              variant='secondary' 
-              onClick={intervalTimer.reset} 
-              className='px-6 py-2'
-            >
-              Resetar
-            </Button>
-          </div>
+        
         </div>
       </Card>
 

@@ -24,3 +24,21 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* MEU BACKGROUND PERSONALIZADO */
+/* Adicione no seu CSS global ou como classe Tailwind customizada */
+.logo-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/jaguar.jpg');
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: contain; /* ou cover para preencher toda a área */
+  opacity: 0.2; /* Transparência para não interferir no conteúdo */
+  z-index: 0;
+  pointer-events: none; /* Para não interferir nos cliques */
+}
