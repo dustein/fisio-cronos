@@ -7,6 +7,11 @@ module.exports = {
         'roboto': ['Roboto', 'sans-serif'],
         'fira': ['Fira Code', 'monospace'],
         'stopwatch': ['JetBrains Mono', 'Fira Code', 'monospace'],
+      },
+      fontSize: {
+        'fluid-xl': 'clamp(3rem, 12vw, 8rem)',
+        'fluid-lg': 'clamp(1rem, 3vw, 2rem)',
+        'fluid-md': 'clamp(0.875rem, 2vw, 1.25rem)',
       }
     }
   }

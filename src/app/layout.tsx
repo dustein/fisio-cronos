@@ -10,11 +10,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className="antialiased flex flex-col min-h-screen">
+      <body className="antialiased flex flex-col justify-between min-h-screen">
                 
         <Navbar />
         
-        <div className="bg-gray-800 flex-1">
+        <div className="bg-gray-700 flex-1 flex flex-col">
           {children}
         </div>
 

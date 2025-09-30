@@ -8,6 +8,7 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   title?: string;
+  className?: string;
 }
 
 const Modal = ({ isOpen, onClose, children, title }: ModalProps) => {

@@ -13,9 +13,9 @@ export default function Card({ children, title, className = '', variant = 'defau
   };
 
   return (
-    <div className={`border rounded-lg p-0 shadow-sm text-center ${variantClasses[variant]} ${className}`}>
+    <div className={`border rounded-lg shadow-sm text-center ${variantClasses[variant]} ${className}`}>
       {title && (
-        <h3 className="text-xl font-semibold mb-4 text-gray-800">
+        <h3 className="text-xl font-semibold text-gray-800">
           {title}
         </h3>
       )}
