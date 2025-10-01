@@ -20,22 +20,6 @@ export default function Home() {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  // const getPhaseColor = () => {
-  //   if (intervalTimer.isCompleted) return 'text-red-500';
-  //   return intervalTimer.isActivity ? 'text-green-500' : 'text-blue-500';
-  // };
-
-  // const getPhaseLabel = () => {
-  //   if (intervalTimer.isCompleted) return 'CONCLUÍDO!';
-  //   return intervalTimer.isActivity ? 'ATIVIDADE' : 'DESCANSO';
-  // };
-
-  // const getCurrentTarget = () => {
-  //   return intervalTimer.isActivity 
-  //     ? intervalTimer.settings.activityTime 
-  //     : intervalTimer.settings.restTime;
-  // };
-
   return (
     <main className="flex h-full w-full mx-auto p-0.5 py-1 space-y-4 flex-1">
       
@@ -48,10 +32,15 @@ export default function Home() {
             <Button
               onClick={() => setShowSettings(true)}
               variant="secondary"
-              className="text-l px-1 py-1"
+              className={`text-l px-1 py-1 transition-all duration-300 ${
+                !intervalTimer.isRunning 
+                  ? 'animate-pulse hover:animate-bounce' 
+                  : 'opacity-45'
+              }`}
             >
               ⚙️
             </Button>
+            {/* <span className="absolute top-0 right-0 -mt-1 -mr-1 h-3 w-3 animate-ping rounded-full bg-green-400 opacity-75"></span> */}
           </div>
 
           < TimerContainer 
@@ -68,7 +57,7 @@ export default function Home() {
       <Modal 
         isOpen={showSettings}
         onClose={() => setShowSettings(false)}
-        title="Configurações do Interval Training"
+        title="Configurações dos Tempos"
         className="max-w-md w-full mx-auto overflow-hidden"
       >
         <div className="max-h-[80vh] overflow-y-auto overflow-x-hidden">

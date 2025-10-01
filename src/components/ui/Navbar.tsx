@@ -8,17 +8,17 @@ export default function Navbar() {
 
   const navItems = [
     { href: '/', label: 'Home' },
-    { href: '/sobre', label: 'Sobre' },
+    // { href: '/sobre', label: 'Sobre' },
     { href: '/contato', label: 'Contato' }
   ];
 
 
   return (
-    <nav className="bg-blue-950 text-zinc-100">
+    <nav className="bg-gray-950">
       <div className="max-w-4xl mx-auto px-4">
-        <div className="flex justify-between items-center py-2">
+        <div className="flex justify-between items-center py-1">
           {/* Logo */}
-          <Link href="/" className="text-md font-bold text-blue-50">
+          <Link href="/" className="text-md font-bold text-zinc-200">
             Fisio Cronos
           </Link>
 

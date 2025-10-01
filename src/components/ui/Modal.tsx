@@ -43,11 +43,11 @@ const Modal = ({ isOpen, onClose, children, title }: ModalProps) => {
       <div className="relative bg-gray-900 rounded-lg shadow-xl max-w-md w-full mx-4 max-h-[90vh] overflow-auto">
         {/* Header */}
         {title && (
-          <div className="flex items-center justify-between p-4 border-b border-gray-700">
-            <h2 className="text-lg font-semibold text-white">{title}</h2>
+          <div className="flex items-center justify-between px-4 py-1.5 border-b border-gray-700">
+            <h2 className="text-l font-semibold text-gray-200">{title}</h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-gray-200 hover:text-white transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -57,7 +57,7 @@ const Modal = ({ isOpen, onClose, children, title }: ModalProps) => {
         )}
         
         {/* Content */}
-        <div className="p-4">
+        <div className="p-2">
           {children}
         </div>
       </div>

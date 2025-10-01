@@ -2,8 +2,15 @@
 export default function Footer() {
 
   return (
-    <div>
-      <h1>FOOTER</h1>
+    <div className="text-xs text-center text-gray-500">
+      desenvolvido por 
+      <a 
+        href="https://dustein.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-300"
+      > DuStein
+      </a>
 
     </div>
   )
