@@ -8,7 +8,7 @@ export default function Navbar() {
 
   const navItems = [
     { href: '/', label: 'Home' },
-    // { href: '/sobre', label: 'Sobre' },
+    { href: '/sobre', label: 'Sobre' },
     { href: '/contato', label: 'Contato' }
   ];
 
@@ -24,7 +24,7 @@ export default function Navbar() {
 
           {/* Menu Items */}
           <div className="flex">
-            {navItems.map((item) => (
+            {/* {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -36,7 +36,7 @@ export default function Navbar() {
               >
                 {item.label}
               </Link>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>
