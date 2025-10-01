@@ -18,6 +18,8 @@ interface IntervalTimerType {
   remainingActivity: number;
   remainingRest: number;
   remainingTotal: number;
+  isCountingDown: boolean; // NOVO
+  countdownValue: number;  // NOVO
   formattedCurrentTime: {
     minutes: string;
     seconds: string;
@@ -75,6 +77,8 @@ export const TimerContainer = ({ intervalTimer, formatTime }: TimerContainerProp
           seconds={intervalTimer.formattedCurrentTime.seconds}
           milliseconds={intervalTimer.formattedCurrentTime.milliseconds}
           phaseColor={getPhaseColor()}
+          isCountingDown={intervalTimer.isCountingDown}
+          countdownValue={intervalTimer.countdownValue}
         />
       </div>
 
