@@ -2,7 +2,7 @@
 export default function Footer() {
 
   return (
-    <div className="text-xs text-center text-gray-500">
+    <div className="text-xs text-center text-gray-500 flex-shrink-0">
       desenvolvido por 
       <a 
         href="https://dustein.com"

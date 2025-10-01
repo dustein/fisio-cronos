@@ -10,7 +10,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className="antialiased flex flex-col justify-between min-h-screen">
+      {/* <body className="antialiased flex flex-col justify-between min-h-screen"> */}
+      <body className="min-h-full min-h-dvh flex flex-col">
                 
         <Navbar />
         

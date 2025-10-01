@@ -42,3 +42,21 @@ body {
   z-index: 0;
   pointer-events: none; /* Para não interferir nos cliques */
 }
+
+/* PARA FULL SCREEN DESCONSIDERAR BARRA DO NAVEGADOR */
+
+/* globals.css ou app.css */
+html, body {
+  height: 100vh;
+  height: 100dvh; /* Dynamic Viewport Height - considera barra de endereços */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Fallback para navegadores que não suportam dvh */
+@supports not (height: 100dvh) {
+  html, body {
+    height: 100vh;
+  }
+}
