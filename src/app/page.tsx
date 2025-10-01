@@ -106,15 +106,15 @@ export default function Home() {
   }, [intervalTimer.isRunning, requestWakeLock, releaseWakeLock]);
 
   // Componente para mostrar status do Wake Lock
-  const WakeLockIndicator = () => {
-    if (!intervalTimer.isRunning) return null;
+  // const WakeLockIndicator = () => {
+  //   if (!intervalTimer.isRunning) return null;
     
-    return (
-      <div className="fixed bottom-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg flex-1 flex">
-        📱 Tela ativa
-      </div>
-    );
-  };
+  //   return (
+  //     <div className="fixed bottom-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg flex-1 flex">
+  //       📱 Tela ativa
+  //     </div>
+  //   );
+  // };
 
   return (
     <main className="flex h-full w-full mx-auto p-0.5 py-1 space-y-4 flex-1">
@@ -147,7 +147,7 @@ export default function Home() {
       </Card>
 
       {/* Indicador de Wake Lock */}
-      <WakeLockIndicator />
+      {/* <WakeLockIndicator /> */}
 
       {/* Modal de Configurações */}
       <Modal 

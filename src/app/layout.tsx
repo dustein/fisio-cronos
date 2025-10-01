@@ -1,8 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/ui/Navbar";
-
 import Footer from "@/components/ui/Footer";
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -20,7 +19,7 @@ export default function RootLayout({
         </div>
 
         <Footer />
-
+        <SpeedInsights />
       </body>
     </html>
   );
