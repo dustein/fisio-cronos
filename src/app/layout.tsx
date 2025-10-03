@@ -11,14 +11,15 @@ export default function RootLayout({
     <html lang="pt-BR">
       {/* <body className="antialiased flex flex-col justify-between min-h-screen"> */}
       <body className="min-h-full min-h-dvh flex flex-col">
-                
-        <Navbar />
-        
-        <div className="bg-gray-700 flex-1 flex flex-col">
-          {children}
-        </div>
+        <div className="max-w-md mx-auto w-full min-h-dvh max-h-vh flex flex-col">
+          <Navbar />
+          
+          <div className="bg-gray-700 flex-1 flex flex-col">
+            {children}
+          </div>
 
-        <Footer />
+          <Footer />
+        </div>
         <SpeedInsights />
       </body>
     </html>

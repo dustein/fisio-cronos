@@ -50,7 +50,7 @@ export default function Home() {
 
         <div className='p-6 bg-gray-900 rounded-lg relative min-h-[400px] logo-background flex-1 flex'>
 
-          {/* Botão de configurações */}
+          {/* Botão de CONFIGURAÇÕES */}
           <div className="absolute top-2 right-2">
             <Button
               onClick={() => setShowSettings(true)}
@@ -61,7 +61,7 @@ export default function Home() {
                   : 'opacity-45'
               }`}
             >
-              ⚙️
+              ⚙️ {!intervalTimer.isRunning && <p className='text-sm font-light'>Tempos</p>}
             </Button>
           </div>
 
@@ -76,7 +76,7 @@ export default function Home() {
       {/* Indicador de Wake Lock */}
       {/* <WakeLockIndicator /> */}
 
-      {/* Modal de Configurações */}
+      {/* MODAL de Configurações de Tempos */}
       <Modal 
         isOpen={showSettings}
         onClose={() => setShowSettings(false)}

@@ -75,6 +75,14 @@ const IntervalSettingsComponent = ({ settings, onSettingsChange, onClose }: Inte
     );
   };
 
+  const handleReset = () => {
+    setActivityMin(0);
+    setActivitySec(0);
+    setRestMin(0);
+    setRestSec(0);
+    setTotalMin(0);
+  };
+
   const handleSave = () => {
     const newSettings: IntervalSettings = {
       activityTime: (activityMin * 60 + activitySec) * 1000,
@@ -91,7 +99,7 @@ const IntervalSettingsComponent = ({ settings, onSettingsChange, onClose }: Inte
   const formatTime = (minutes: number, seconds: number) => {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
-
+  
   return (
     <div className="w-full max-w-full overflow-hidden">
       <div className="space-y-2 p-1">
@@ -270,8 +278,15 @@ const IntervalSettingsComponent = ({ settings, onSettingsChange, onClose }: Inte
         </div>
 
         {/* Botões */}
-      <div className="flex flex-col text-l sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+        <div className="flex flex-col text-l sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
         
+          <Button 
+            onClick={handleReset} 
+            variant="secondary" 
+            className="w-full bg-red-500/30 hover:bg-red-600 text-white"
+          >
+            Reset Tempos
+          </Button>
           <Button onClick={onClose} variant="secondary" className="flex-1 w-full">
             Cancelar
           </Button>
@@ -279,7 +294,7 @@ const IntervalSettingsComponent = ({ settings, onSettingsChange, onClose }: Inte
           <Button 
             onClick={handleSave} 
             variant="primary" 
-            className="flex-1 w-full"
+            className="flex-1 w-full border border-2 border-green-500"
             disabled={
               (activityMin * 60 + activitySec) === 0 || 
               (restMin * 60 + restSec) === 0 || 
@@ -290,6 +305,7 @@ const IntervalSettingsComponent = ({ settings, onSettingsChange, onClose }: Inte
           </Button>
         </div>
       </div>
+      
     </div>
   );
 };
