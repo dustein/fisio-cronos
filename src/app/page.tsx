@@ -51,19 +51,19 @@ export default function Home() {
         <div className='p-6 bg-gray-900 rounded-lg relative min-h-[400px] logo-background flex-1 flex'>
 
           {/* Botão de CONFIGURAÇÕES */}
-          <div className="absolute top-2 right-2">
-            <Button
+          
+            <div
               onClick={() => setShowSettings(true)}
-              variant="secondary"
-              className={`text-l px-1 py-1 transition-all duration-300 ${
+              // variant="secondary"
+              className={`absolute top-2 right-2 border-2 border-gray-400/20 rounded-l text-l p-0.5 m-0 transition-all duration-300 ${
                 !intervalTimer.isRunning 
                   ? 'animate-pulse hover:animate-bounce' 
                   : 'opacity-45'
               }`}
             >
               ⚙️ {!intervalTimer.isRunning && <p className='text-sm font-light'>Tempos</p>}
-            </Button>
-          </div>
+            </div>
+          
 
           <TimerContainer 
             intervalTimer={intervalTimer}

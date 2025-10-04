@@ -294,7 +294,7 @@ const IntervalSettingsComponent = ({ settings, onSettingsChange, onClose }: Inte
           <Button 
             onClick={handleSave} 
             variant="primary" 
-            className="flex-1 w-full border border-2 border-green-500"
+            className="flex-1 w-full border-2 border-green-500"
             disabled={
               (activityMin * 60 + activitySec) === 0 || 
               (restMin * 60 + restSec) === 0 || 
