@@ -2,7 +2,6 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import Modal from '@/components/ui/Modal';
 import IntervalSettingsComponent from '@/components/IntervalSettings';
