@@ -48,7 +48,7 @@ export default function RootLayout({
         Scripts devem usar o componente <Script>.
       */}
       <body className="min-h-full min-h-dvh flex flex-col">
-        <div className="max-w-[1024px] mx-auto w-full min-h-dvh max-h-vh flex flex-col">
+        <div className="mx-auto w-full min-h-dvh max-h-vh flex flex-col">
           <Navbar />
           
           <div className="bg-gray-700 flex-1 flex flex-col">
