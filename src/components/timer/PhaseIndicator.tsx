@@ -1,4 +1,3 @@
-// components/timer/PhaseIndicator.tsx
 interface PhaseIndicatorProps {
   phaseLabel: string;
   phaseColor: string;
@@ -12,9 +11,6 @@ export const PhaseIndicator = ({ phaseLabel, phaseColor, cycleCount }: PhaseIndi
         {phaseLabel}
         <p className="text-gray-300 text-sm font-light">Ciclo {(cycleCount + 1).toString().padStart(2, '0')}</p>
       </div>
-      {/* <div className="text-gray-400 text-sm">
-        Ciclo {cycleCount + 1}
-      </div> */}
     </div>
   );
 };

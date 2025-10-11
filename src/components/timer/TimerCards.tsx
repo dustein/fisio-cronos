@@ -1,4 +1,3 @@
-// components/timer/TimerCards.tsx
 interface TimerCardsProps {
   activityTime: number;
   restTime: number;
@@ -43,7 +42,7 @@ export const TimerCards = ({
       {/* Cronômetro de Descanso */}
       <div className="bg-blue-900/30 rounded-lg p-1 text-center flex flex-col justify-center">
         <div className="text-blue-400 font-semibold text-xs">
-          <p className={`${ isActivity ? 'opacity-20' : ''}`}>😴</p>
+          <p className={`${ isActivity ? 'opacity-20' : ''}`}>🕓</p>
           <p className={`${ isActivity ? 'text-gray-600' : 'text-blue-400'}`}>DESCANSO</p>
           
         </div>

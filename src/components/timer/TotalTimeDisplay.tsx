@@ -1,4 +1,3 @@
-// components/timer/TotalTimeDisplay.tsx
 interface TotalTimeDisplayProps {
   minutes: string;
   seconds: string;

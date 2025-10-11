@@ -1,4 +1,3 @@
-// components/timer/TimerContainer.tsx
 import { PhaseIndicator } from './PhaseIndicator';
 import { TimerDisplay } from './TimerDisplay';
 import { ProgressBar } from './ProgressBar';
@@ -7,7 +6,6 @@ import { TotalTimeDisplay } from './TotalTimeDisplay';
 import { CompletionIndicator } from './CompletionIndicator';
 import { TimerControls } from './TimerControls';
 
-// Interface para definir o tipo do intervalTimer
 interface IntervalTimerType {
   isCompleted: boolean;
   isActivity: boolean;
@@ -38,7 +36,6 @@ interface IntervalTimerType {
   reset: () => void;
 }
 
-// Interface das props do componente
 interface TimerContainerProps {
   intervalTimer: IntervalTimerType;
   formatTime: (ms: number) => string;
@@ -72,6 +69,7 @@ export const TimerContainer = ({ intervalTimer, formatTime }: TimerContainerProp
             cycleCount={intervalTimer.cycleCount}
           />
         </div>
+
         <div className='flex-grow flex items-center justify-center py-4'>
           <TimerDisplay
             minutes={intervalTimer.formattedCurrentTime.minutes}
@@ -82,9 +80,12 @@ export const TimerContainer = ({ intervalTimer, formatTime }: TimerContainerProp
             countdownValue={intervalTimer.countdownValue}
           />
         </div>
+
       </div>
+
       <div>
         <div className='flex-shrink-0 space-y-4'>
+
           <ProgressBar
             label="Progresso da fase"
             remainingTime={formatTime(getCurrentTarget() - intervalTimer.currentTime)}
@@ -126,8 +127,8 @@ export const TimerContainer = ({ intervalTimer, formatTime }: TimerContainerProp
             onReset={intervalTimer.reset}
           />
         </div>
-      </div>
 
+      </div>
       
     </div>
   );

@@ -20,7 +20,7 @@ export const useAudio = (): UseAudioReturn => {
   const initializeSounds = useCallback(() => {
     if (typeof window !== 'undefined') {
       if (!startSoundRef.current) {
-        startSoundRef.current = new Audio('/sounds/start.mp3');
+        startSoundRef.current = new Audio('/sounds/start-sound-beep.mp3');
         startSoundRef.current.preload = 'auto';
         startSoundRef.current.volume = 0.7;
       }
@@ -39,7 +39,7 @@ export const useAudio = (): UseAudioReturn => {
     }
   }, []);
 
-  const playSound = useCallback((audioRef: React.MutableRefObject<HTMLAudioElement | null>) => {
+  const playSound = useCallback((audioRef: React.RefObject<HTMLAudioElement | null>) => {
     if (!isAudioEnabledRef.current) return;
     
     if (!audioRef.current) initializeSounds();

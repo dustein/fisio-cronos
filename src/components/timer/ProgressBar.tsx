@@ -1,4 +1,3 @@
-// components/timer/ProgressBar.tsx
 interface ProgressBarProps {
   label: string;
   remainingTime: string;

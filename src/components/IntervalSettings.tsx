@@ -1,5 +1,3 @@
-'use client'
-
 import { useState } from 'react';
 import Button from '@/components/ui/Button';
 
@@ -21,8 +19,7 @@ const IntervalSettingsComponent = ({ settings, onSettingsChange, onClose }: Inte
   const [restMin, setRestMin] = useState(Math.floor(settings.restTime / 60000));
   const [restSec, setRestSec] = useState(Math.floor((settings.restTime % 60000) / 1000));
   const [totalMin, setTotalMin] = useState(Math.floor(settings.totalTime / 60000));
-
-  // Componente para controle de incremento/decremento
+  
   const NumberControl = ({ 
     value, 
     onIncrement, 
@@ -45,9 +42,9 @@ const IntervalSettingsComponent = ({ settings, onSettingsChange, onClose }: Inte
     color?: 'blue' | 'green' | 'yellow';
   }) => {
     const colorClasses = {
-      blue: 'bg-blue-700 hover:bg-blue-700 disabled:bg-gray-700 disabled:text-gray-500',
-      green: 'bg-green-700 hover:bg-green-700 disabled:bg-gray-700 disabled:text-gray-500',
-      yellow: 'bg-yellow-600 hover:bg-yellow-700 disabled:bg-gray-700 disabled:text-gray-500'
+      blue: 'bg-blue-700/60 hover:bg-blue-700 disabled:bg-gray-700 disabled:text-gray-500',
+      green: 'bg-green-700/60 hover:bg-green-700 disabled:bg-gray-700 disabled:text-gray-500',
+      yellow: 'bg-yellow-600/70 hover:bg-yellow-700 disabled:bg-gray-700 disabled:text-gray-500'
     };
 
     return (
@@ -168,7 +165,7 @@ const IntervalSettingsComponent = ({ settings, onSettingsChange, onClose }: Inte
           {/* Tempo de Descanso */}
           <div className="bg-blue-900/30 rounded-lg p-2">
             
-            <div className="text-blue-400 font-semibold mb-1 text-center">😴 Tempo de Descanso:</div>
+            <div className="text-blue-400 font-semibold mb-1 text-center">🕓 Tempo de Descanso:</div>
             
             <div className="text-blue-400 font-mono text-lg text-center bg-blue-900/50 rounded p-1 mb-2">
             Total: {formatTime(restMin, restSec)}
