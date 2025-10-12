@@ -243,7 +243,7 @@ const IntervalSettingsComponent = ({ settings, onSettingsChange, onClose }: Inte
               
               <div className="text-yellow-400 font-mono text-l text-center bg-yellow-900/50 rounded py-2">
                 <p>Total: {totalMin} minutos</p>
-                <p>{Math.floor((totalMin * 60 * 1000) / ((activityMin * 60 + activitySec + restMin * 60 + restSec) * 1000))} Ciclo(s)</p>
+                <p>{Math.floor((totalMin * 60 * 1000) / ((activityMin * 60 + activitySec + restMin * 60 + restSec) * 1000))|| 0} Ciclo(s)</p>
               </div>
             </div>
           </div>
@@ -268,7 +268,7 @@ const IntervalSettingsComponent = ({ settings, onSettingsChange, onClose }: Inte
             <div className="flex justify-between items-center">
               <span className="text-gray-400">Ciclo(s):</span>
               <span className="text-white font-mono">
-                {Math.floor((totalMin * 60 * 1000) / ((activityMin * 60 + activitySec + restMin * 60 + restSec) * 1000))}
+                {Math.floor((totalMin * 60 * 1000) / ((activityMin * 60 + activitySec + restMin * 60 + restSec) * 1000)) || 0}
               </span>
             </div>
           </div>

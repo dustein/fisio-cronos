@@ -26,7 +26,6 @@ body {
 }
 
 /* MEU BACKGROUND PERSONALIZADO */
-/* Adicione no seu CSS global ou como classe Tailwind customizada */
 .logo-background::before {
   content: '';
   position: absolute;
@@ -37,10 +36,10 @@ body {
   background-image: url('/jaguar.jpg');
   background-repeat: no-repeat;
   background-position: top;
-  background-size: contain; /* ou cover para preencher toda a área */
-  opacity: 0.2; /* Transparência para não interferir no conteúdo */
+  background-size: contain; 
+  opacity: 0.2;
   z-index: 0;
-  pointer-events: none; /* Para não interferir nos cliques */
+  pointer-events: none;
 }
 
 /* PARA FULL SCREEN DESCONSIDERAR BARRA DO NAVEGADOR */

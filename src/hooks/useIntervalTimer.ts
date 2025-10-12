@@ -1,215 +1,3 @@
-// // hooks/useIntervalTimer.ts
-// import { useState, useEffect, useRef } from 'react';
-// import { useAudio } from './useAudio';
-
-// interface TimeFormatted {
-//   minutes: string;
-//   seconds: string;
-//   milliseconds: string;
-//   full: string;
-// }
-
-// interface IntervalSettings {
-//   activityTime: number; // em ms
-//   restTime: number;     // em ms
-//   totalTime: number;    // em ms
-// }
-
-// interface UseIntervalTimerReturn {
-//   currentTime: number;
-//   totalElapsed: number;
-//   isRunning: boolean;
-//   isActivity: boolean; // true = atividade, false = descanso
-//   formattedCurrentTime: TimeFormatted;
-//   formattedTotalTime: TimeFormatted;
-//   remainingActivity: number;
-//   remainingRest: number;
-//   remainingTotal: number;
-//   cycleCount: number;
-//   isCompleted: boolean;
-//   settings: IntervalSettings;
-//   start: () => void;
-//   stop: () => void;
-//   reset: () => void;
-//   toggle: () => void;
-//   updateSettings: (settings: IntervalSettings) => void;
-// }
-
-// export const useIntervalTimer = (initialSettings?: IntervalSettings): UseIntervalTimerReturn => {
-//   const defaultSettings: IntervalSettings = {
-//     activityTime: 30000, // 30s
-//     restTime: 120000,    // 2min
-//     totalTime: 600000    // 10min
-//   };
-
-//   const [settings, setSettings] = useState<IntervalSettings>(initialSettings || defaultSettings);
-//   const [currentTime, setCurrentTime] = useState<number>(0);
-//   const [totalElapsed, setTotalElapsed] = useState<number>(0);
-//   const [isRunning, setIsRunning] = useState<boolean>(false);
-//   const [isActivity, setIsActivity] = useState<boolean>(true); // Começa com atividade
-//   const [cycleCount, setCycleCount] = useState<number>(0);
-//   const [isCompleted, setIsCompleted] = useState<boolean>(false);
-//   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-//   // Hook de áudio
-//   const { playStartSound, playEndSound, playRestSound } = useAudio();
-
-//   useEffect(() => {
-//     if (isRunning && !isCompleted) {
-//       intervalRef.current = setInterval(() => {
-//         setCurrentTime(prevTime => prevTime + 10);
-//         setTotalElapsed(prevTotal => {
-//           const newTotal = prevTotal + 10;
-          
-//           // Verifica se completou o tempo total
-//           if (newTotal >= settings.totalTime) {
-//             setIsRunning(false);
-//             setIsCompleted(true);
-            
-//             // Som de conclusão final - APENAS AQUI
-//             playEndSound();
-            
-//             return settings.totalTime;
-//           }
-          
-//           return newTotal;
-//         });
-//       }, 10);
-//     } else {
-//       if (intervalRef.current) {
-//         clearInterval(intervalRef.current);
-//         intervalRef.current = null;
-//       }
-//     }
-
-//     return () => {
-//       if (intervalRef.current) {
-//         clearInterval(intervalRef.current);
-//       }
-//     };
-//   }, [isRunning, isCompleted, settings.totalTime, playEndSound]);
-
-//   // Lógica de alternância entre atividade e descanso com sons
-//   useEffect(() => {
-//     const targetTime = isActivity ? settings.activityTime : settings.restTime;
-    
-//     if (currentTime >= targetTime && isRunning) {
-//       if (isActivity) {
-//         // Fim da atividade → início do descanso
-//         // Som de início do descanso
-//         setTimeout(() => {
-//           playRestSound();
-//         }, 100);
-        
-//       } else {
-//         // Fim do descanso → início da nova atividade
-//         playStartSound(); // Som de início da atividade
-        
-//         // Incrementa ciclo quando completa um descanso (fim do ciclo completo)
-//         setCycleCount(prev => prev + 1);
-//       }
-      
-//       // Alterna entre atividade e descanso
-//       setIsActivity(prev => !prev);
-//       setCurrentTime(0);
-//     }
-//   }, [currentTime, isActivity, settings.activityTime, settings.restTime, isRunning, playStartSound, playRestSound]);
-
-//   const formatTime = (milliseconds: number): TimeFormatted => {
-//     const totalSeconds = Math.floor(milliseconds / 1000);
-//     const minutes = Math.floor(totalSeconds / 60);
-//     const seconds = totalSeconds % 60;
-//     const ms = Math.floor((milliseconds % 1000) / 10);
-
-//     const minutesStr = minutes.toString().padStart(2, '0');
-//     const secondsStr = seconds.toString().padStart(2, '0');
-//     const msStr = ms.toString().padStart(2, '0');
-
-//     return {
-//       minutes: minutesStr,
-//       seconds: secondsStr,
-//       milliseconds: msStr,
-//       full: `${minutesStr}:${secondsStr}.${msStr}`
-//     };
-//   };
-
-//   const start = () => {
-//     setIsCompleted(false);
-    
-//     // Som de preparação no primeiro início
-//     if (currentTime === 0 && totalElapsed === 0 && isActivity) {
-//       // Tocar som de descanso duas vezes antes de iniciar
-//       playRestSound(); // Primeiro bip
-      
-//       setTimeout(() => {
-//         playRestSound(); // Segundo bip
-//       }, 400);
-      
-//       setTimeout(() => {
-//         playStartSound(); // Som de início
-//         setIsRunning(true); // Só inicia o cronômetro após os sons
-//       }, 4200);
-//     } else {
-//       // Se não for o primeiro início, inicia normalmente
-//       setIsRunning(true);
-//     }
-//   };
-
-//   const stop = () => {
-//     setIsRunning(false);
-//   };
-
-//   const reset = () => {
-//     setCurrentTime(0);
-//     setTotalElapsed(0);
-//     setIsRunning(false);
-//     setIsActivity(true);
-//     setCycleCount(0);
-//     setIsCompleted(false);
-//   };
-
-//   const toggle = () => {
-//     if (!isCompleted) {
-//       if (!isRunning) {
-//         // Se estiver parado e for dar play
-//         start();
-//       } else {
-//         // Se estiver rodando e for pausar
-//         stop();
-//       }
-//     }
-//   };
-
-//   const updateSettings = (newSettings: IntervalSettings) => {
-//     setSettings(newSettings);
-//     reset(); // Reset quando mudar configurações
-//   };
-
-//   const remainingActivity = Math.max(0, settings.activityTime - (isActivity ? currentTime : 0));
-//   const remainingRest = Math.max(0, settings.restTime - (!isActivity ? currentTime : 0));
-//   const remainingTotal = Math.max(0, settings.totalTime - totalElapsed);
-
-//   return {
-//     currentTime,
-//     totalElapsed,
-//     isRunning,
-//     isActivity,
-//     formattedCurrentTime: formatTime(currentTime),
-//     formattedTotalTime: formatTime(totalElapsed),
-//     remainingActivity,
-//     remainingRest,
-//     remainingTotal,
-//     cycleCount,
-//     isCompleted,
-//     settings,
-//     start,
-//     stop,
-//     reset,
-//     toggle,
-//     updateSettings
-//   };
-// };
-
 // hooks/useIntervalTimer.ts
 import { useState, useEffect, useRef } from 'react';
 import { useAudio } from './useAudio';
@@ -249,7 +37,15 @@ interface UseIntervalTimerReturn {
   updateSettings: (settings: IntervalSettings) => void;
 }
 
-export const useIntervalTimer = (initialSettings?: IntervalSettings): UseIntervalTimerReturn => {
+interface WakeLockFunctions {
+  requestWakeLock: () => Promise<void>;
+  releaseWakeLock: () => void;
+}
+
+export const useIntervalTimer = (
+  initialSettings?: IntervalSettings,
+  wakeLockFunctions?: WakeLockFunctions
+): UseIntervalTimerReturn => {
   const defaultSettings: IntervalSettings = {
     activityTime: 10000, // 10s
     restTime: 10000,    // 10s
@@ -283,6 +79,12 @@ export const useIntervalTimer = (initialSettings?: IntervalSettings): UseInterva
             setIsRunning(false);
             setIsCompleted(true);
             playEndSound();
+            
+            // Liberar Wake Lock quando completar
+            if (wakeLockFunctions?.releaseWakeLock) {
+              wakeLockFunctions.releaseWakeLock();
+            }
+            
             return settings.totalTime;
           }
           
@@ -301,7 +103,7 @@ export const useIntervalTimer = (initialSettings?: IntervalSettings): UseInterva
         clearInterval(intervalRef.current);
       }
     };
-  }, [isRunning, isCompleted, settings.totalTime, playEndSound]);
+  }, [isRunning, isCompleted, settings.totalTime, playEndSound, wakeLockFunctions]);
 
   // Lógica de alternância entre atividade e descanso
   useEffect(() => {
@@ -322,6 +124,26 @@ export const useIntervalTimer = (initialSettings?: IntervalSettings): UseInterva
     }
   }, [currentTime, isActivity, settings.activityTime, settings.restTime, isRunning, playStartSound, playRestSound]);
 
+  // Listener para visibilidade da página - reativar Wake Lock
+  useEffect(() => {
+    const handleVisibilityChange = async () => {
+      if (document.visibilityState === 'visible' && isRunning && wakeLockFunctions?.requestWakeLock) {
+        try {
+          await wakeLockFunctions.requestWakeLock();
+          console.log('Wake Lock reativado após voltar à página');
+        } catch (error) {
+          console.warn('Não foi possível reativar Wake Lock:', error);
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [isRunning, wakeLockFunctions]);
+
   const formatTime = (milliseconds: number): TimeFormatted => {
     const totalSeconds = Math.floor(milliseconds / 1000);
     const minutes = Math.floor(totalSeconds / 60);
@@ -341,9 +163,19 @@ export const useIntervalTimer = (initialSettings?: IntervalSettings): UseInterva
   };
 
   // Função de contagem regressiva separada e organizada
-  const startCountdown = () => {
+  const startCountdown = async () => {
     setIsCountingDown(true);
     setCountdownValue(3);
+
+    // Solicitar Wake Lock no início da contagem regressiva
+    if (wakeLockFunctions?.requestWakeLock) {
+      try {
+        await wakeLockFunctions.requestWakeLock();
+        console.log('Wake Lock ativado durante contagem regressiva');
+      } catch (error) {
+        console.warn('Erro ao ativar Wake Lock:', error);
+      }
+    }
 
     // Sequência sincronizada: 3, 2, 1, START
     const sequence = [
@@ -371,14 +203,28 @@ export const useIntervalTimer = (initialSettings?: IntervalSettings): UseInterva
     if (currentTime === 0 && totalElapsed === 0 && isActivity) {
       startCountdown();
     } else {
-      // Retomar = início direto
+      // Retomar = início direto com Wake Lock
       setIsRunning(true);
+      
+      if (wakeLockFunctions?.requestWakeLock) {
+        wakeLockFunctions.requestWakeLock().then(() => {
+          console.log('Wake Lock ativado ao retomar timer');
+        }).catch((error) => {
+          console.warn('Erro ao ativar Wake Lock ao retomar:', error);
+        });
+      }
     }
   };
 
   const stop = () => {
     setIsRunning(false);
     setIsCountingDown(false);
+    
+    // Liberar Wake Lock quando pausar
+    if (wakeLockFunctions?.releaseWakeLock) {
+      wakeLockFunctions.releaseWakeLock();
+      console.log('Wake Lock liberado ao pausar timer');
+    }
   };
 
   const reset = () => {
@@ -390,6 +236,12 @@ export const useIntervalTimer = (initialSettings?: IntervalSettings): UseInterva
     setIsCompleted(false);
     setIsCountingDown(false);
     setCountdownValue(3);
+    
+    // Liberar Wake Lock quando resetar
+    if (wakeLockFunctions?.releaseWakeLock) {
+      wakeLockFunctions.releaseWakeLock();
+      console.log('Wake Lock liberado ao resetar timer');
+    }
   };
 
   const toggle = () => {

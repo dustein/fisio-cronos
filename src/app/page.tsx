@@ -11,9 +11,13 @@ import { TimerContainer } from '@/components/timer/TimerContainer';
 export default function Home() {
   const [showSettings, setShowSettings] = useState(false);
   
-  const intervalTimer = useIntervalTimer();
   const { requestWakeLock, releaseWakeLock } = useWakeLock();
-
+  
+  const intervalTimer = useIntervalTimer(undefined, {
+  requestWakeLock,
+  releaseWakeLock
+  });
+  
   const formatTime = (ms: number) => {
     const totalSeconds = Math.floor(ms / 1000);
     const minutes = Math.floor(totalSeconds / 60);
@@ -21,27 +25,9 @@ export default function Home() {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  // Gerenciar wake lock baseado no estado do timer
-  useEffect(() => {
-    if (intervalTimer.isRunning) {
-      requestWakeLock();
-    } else {
-      releaseWakeLock();
-    }
-  }, [intervalTimer.isRunning, requestWakeLock, releaseWakeLock]);
-
-  // Componente para mostrar status do Wake Lock
-  // const WakeLockIndicator = () => {
-  //   if (!intervalTimer.isRunning) return null;
-    
-  //   return (
-  //     <div className="fixed bottom-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg flex-1 flex">
-  //       📱 Tela ativa
-  //     </div>
-  //   );
-  // };
-
   return (
+
+    
     <main className="flex h-full w-full mx-auto p-0.5 py-1 space-y-4 flex-1">
       
       <Card variant="highlighted" className='flex flex-col w-full'>
